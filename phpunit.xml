@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./test/Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="collections">
+            <directory>./test/NFSeTest/XML/Collection</directory>
+        </testsuite>
+        <testsuite name="managers">
+            <directory suffix="ManagerTest.php">./test/NFSeTest/Service</directory>
+        </testsuite>
+        <testsuite name="factories">
+            <directory>./test/NFSeTest/XML/Factory</directory>
+        </testsuite>
+        <testsuite name="entities">
+            <directory>./test/NFSeTest/XML/Entity</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
