@@ -8,7 +8,7 @@
 
 namespace NFSe\XML\Collection;
 
-use \SplStack;
+use \SplQueue;
 use \NFSe\XML\Entity\AbstractEntity;
 use \Zend\Stdlib\ArraySerializableInterface;
 
@@ -17,7 +17,7 @@ use \Zend\Stdlib\ArraySerializableInterface;
  *
  * @author Pedro Marcelo
  */
-class EntityCollection extends SplStack implements ArraySerializableInterface
+class EntityCollection extends SplQueue implements ArraySerializableInterface
 {
     /**
      * Returns the first element of collection
