@@ -1,6 +1,6 @@
 <?php
 
-namespace NFSe\Exception;
+namespace NFSe\XML;
 
 /**
  * Description of InexistentXMLTagException
@@ -9,8 +9,4 @@ namespace NFSe\Exception;
  */
 class InexistentXMLTagException extends \Exception
 {
-    public function __construct($message)
-    {
-        parent::__construct($message);
-    }
 }
