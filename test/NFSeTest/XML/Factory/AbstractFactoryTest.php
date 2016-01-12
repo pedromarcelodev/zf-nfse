@@ -22,7 +22,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
             $factoryManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FactoryManager');
             $factoryManager->get($tagName);
             $this->fail("The '$tagName' tag is mapped");
-        } catch (\NFSe\Exception\InexistentXMLTagException $ex) {
+        } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->assertEquals($ex->getMessage(), "The '$tagName' tag is not mapped");
         }
     }
@@ -38,7 +38,7 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
             $factory = $factoryManager->get($tagName);
             $entity = $factory->buildEntity($xmlObject);
             $this->assertInstanceOf("\NFSe\XML\Entity\AbstractEntity", $entity);
-        } catch (\NFSe\Exception\InexistentXMLTagException $ex) {
+        } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->fail("The '$tagName' tag is not mapped");
         }
     }

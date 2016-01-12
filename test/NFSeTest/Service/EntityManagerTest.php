@@ -16,7 +16,7 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase
             $entityManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\EntityManager');
             $entityManager->get('TestFail');
             $this->fail("The 'TestFail' tag is mapped");
-        } catch (\NFSe\Exception\InexistentXMLTagException $ex) {
+        } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->assertEquals($ex->getMessage(), "The 'TestFail' tag is not mapped");
         }
     }
@@ -28,7 +28,7 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase
             $entityManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\EntityManager');
             $entity = $entityManager->get('AbstractTag');
             $this->assertInstanceOf("\NFSe\XML\Entity\AbstractEntity", $entity);
-        } catch (\NFSe\Exception\InexistentXMLTagException $ex) {
+        } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->fail("The 'AbstractTag' tag is not mapped");
         }
     }

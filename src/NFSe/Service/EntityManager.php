@@ -42,13 +42,13 @@ class EntityManager implements NFSeLocatorInterface
      * 
      * @param string $name
      * @return mixed
-     * @throws \NFSe\Exception\InexistentXMLTagException
+     * @throws \NFSe\XML\InexistentXMLTagException
      */
     public function get($name)
     {
         if (!$this->has($name))
         {
-            throw new \NFSe\Exception\InexistentXMLTagException("The '$name' tag is not mapped");
+            throw new \NFSe\XML\InexistentXMLTagException("The '$name' tag is not mapped");
         }
         $entity = $this->entities[$name];
         $result = null;
