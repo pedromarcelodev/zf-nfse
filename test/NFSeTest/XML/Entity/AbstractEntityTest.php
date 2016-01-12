@@ -71,6 +71,13 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value3', $entity->getChild(1)->getAttribute('attr3'));
     }
     
+    public function testSetValue()
+    {
+        $entity = new AbstractEntity();
+        $entity->setValue('Value');
+        $this->assertEquals('Value', $entity->getValue());
+    }
+    
     public function testParseObjectToXML()
     {
     	$xml = file_get_contents(__DIR__ . '/../../../xml-tests/abstractentity.xml');

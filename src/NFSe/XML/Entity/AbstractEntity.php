@@ -32,6 +32,13 @@ class AbstractEntity
      */
     private $children;
     
+    /**
+     * XML Tag Value
+     *
+     * @var mixed
+     */
+    private $value;
+    
     public function __construct()
     {
         $this->children = new EntityCollection();
@@ -125,5 +132,25 @@ class AbstractEntity
     public function getCountChildren()
     {
         return $this->children->count();
+    }
+    
+    /**
+     * Sets a value to this entity
+     * 
+     * @param mixed $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+    
+    /**
+     * Returns the entity's value
+     * 
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }
