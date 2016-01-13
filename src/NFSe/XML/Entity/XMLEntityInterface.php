@@ -8,5 +8,8 @@ namespace NFSe\XML\Entity;
  */
 interface XMLEntityInterface
 {
+    /**
+     * Returns an XML representation of this object
+     */
     public function toXML();
 }
