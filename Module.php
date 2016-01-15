@@ -36,6 +36,9 @@ class Module
                 'NFSe\Service\EntityManager' => function($serviceManager) {
                     return new Service\EntityManager($serviceManager);
                 },
+                'NFSe\Service\PatternManager' => function($serviceManager) {
+                    return new Service\PatternManager($serviceManager);
+                },
             ),
         );
     }

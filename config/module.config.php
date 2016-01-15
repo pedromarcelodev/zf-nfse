@@ -29,11 +29,23 @@ return array(
                 "factories" => include __DIR__ . "/xmlfactories.map.php",
             ),
         ),
-        "pattern" => array(
-            "date" => "Y-m-d",
-            "datetime" => "Y-m-d\TH:i:s",
-            "decimal" => "+9.99",
-            "percent" => "+9.9999",
+        "pattern_manager" => array(
+            "date" => array(
+                "type" => "datetime",
+                "pattern" => "Y-m-d",
+            ),
+            "datetime" => array(
+                "type" => "datetime",
+                "pattern" => "Y-m-d\TH:i:s",
+            ),
+            "decimal" => array(
+                "type" => "float",
+                "pattern" => "+9.99",
+            ),
+            "percent" => array(
+                "type" => "float",
+                "pattern" => "+9.9999",
+            ),
         ),
     ),
 );
