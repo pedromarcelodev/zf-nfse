@@ -50,6 +50,14 @@ class PatternManager
         }
     }
     
+    /**
+     * Adds a new pattern item
+     * 
+     * @param string $key
+     * @param array $options
+     * @return boolean Returns true if item was added or false otherwise
+     * @throws \Exception
+     */
     public function addPatternItem($key, array $options)
     {
         if (!isset($this->patterns[$key]))
@@ -84,6 +92,14 @@ class PatternManager
         return false;
     }
     
+    /**
+     * Returns a transformed value according to the pattern
+     * 
+     * @param string $key
+     * @param mixed $value
+     * @return mixed
+     * @throws \NFSeTest\Service\InexistentPatternValueException If the pattern does not exists
+     */
     public function getValue($key, $value)
     {
         if (!isset($this->patterns[$key]))
@@ -111,6 +127,7 @@ class PatternManager
     }
     
     /**
+     * Returns an instance of ServiceManager
      * 
      * @return ServiceManager
      */
@@ -120,6 +137,7 @@ class PatternManager
     }
     
     /**
+     * Returns an array that contains default helpers for transform values
      * 
      * @return array
      */
