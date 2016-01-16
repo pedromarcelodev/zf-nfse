@@ -30,6 +30,7 @@ class AbstractFactory
     }
     
     /**
+     * Builds an entity by adding their attributes and children
      * 
      * @param \SimpleXMLElement $xmlElement
      * @return \NFSe\XML\Entity\AbstractEntity
