@@ -64,7 +64,7 @@ class EntityManager implements NFSeLocatorInterface
         }
         else if (is_callable($entity))
         {
-            $result = call_user_func($entity);
+            $result = call_user_func($entity, $this);
         }
         
         return $result;
@@ -86,6 +86,6 @@ class EntityManager implements NFSeLocatorInterface
      */
     public function getServiceManager()
     {
-        
+        return $this->serviceManager;
     }
 }
