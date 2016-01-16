@@ -37,7 +37,7 @@ class AbstractEntity
      *
      * @var mixed
      */
-    private $value;
+    private $value = "";
     
     public function __construct()
     {
