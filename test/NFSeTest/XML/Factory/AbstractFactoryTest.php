@@ -38,6 +38,13 @@ class AbstractFactoryTest extends \PHPUnit_Framework_TestCase
             $factory = $factoryManager->get($tagName);
             $entity = $factory->buildEntity($xmlObject);
             $this->assertInstanceOf("\NFSe\XML\Entity\AbstractEntity", $entity);
+            $this->assertEquals("", $entity->getValue());
+            $this->assertEquals("Value Tag 1", $entity->getChild(0)->getValue());
+            $this->assertEquals("valueAT1", $entity->getChild(0)->getAttribute('attr1'));
+            $this->assertEquals("Value Tag 2", $entity->getChild(1)->getValue());
+            $this->assertEquals("valueAT2", $entity->getChild(1)->getAttribute('attr1'));
+            $this->assertEquals("", $entity->getChild(2)->getValue());
+            $this->assertEquals("valueAT3", $entity->getChild(2)->getAttribute('attr1'));
         } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->fail("The '$tagName' tag is not mapped");
         }

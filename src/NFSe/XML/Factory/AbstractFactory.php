@@ -29,17 +29,33 @@ class AbstractFactory
         $this->factoryManager = $nfseFactoryManager;
     }
     
+    /**
+     * 
+     * @param \SimpleXMLElement $xmlElement
+     * @return \NFSe\XML\Entity\AbstractEntity
+     */
     public function buildEntity(\SimpleXMLElement $xmlElement)
     {
         /* @var $entityManager \NFSe\Service\EntityManager */
         $entityManager = $this->getFactoryManager()->getServiceManager()->get('NFSe\Service\EntityManager');
         $entity = $entityManager->get($xmlElement->getName());
         foreach ($xmlElement->attributes() as $attribute => $value) {
-            
+            $entity->setAttribute($attribute, (string) $value);
         }
-        foreach ($xmlElement->children() as $child) {
-            
+        
+        if ($xmlElement->count() > 0)
+        {
+            $children = $xmlElement->children();
+            foreach ($children as $child) {
+                $factory = $this->getFactoryManager()->get($child->getName());
+                $entity->addChild($factory->buildEntity($child));
+            }
         }
+        else
+        {
+            $entity->setValue((string) $xmlElement);
+        }
+        return $entity;
     }
     
     /**

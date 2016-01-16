@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AbstractTag attr1="value1" attr2="value2" attr3="value3">
-    <AbstractTag attr1="value1">Value Tag 1</AbstractTag>
-    <AbstractTag attr1="value1">Value Tag 2</AbstractTag>
+    <AbstractTag attr1="valueAT1">Value Tag 1</AbstractTag>
+    <AbstractTag attr1="valueAT2">Value Tag 2</AbstractTag>
+    <AbstractTag attr1="valueAT3"/>
 </AbstractTag>
