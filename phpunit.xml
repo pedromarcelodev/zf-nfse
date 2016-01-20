@@ -4,6 +4,9 @@
         <testsuite name="collections">
             <directory>./test/NFSeTest/XML/Collection</directory>
         </testsuite>
+        <testsuite name="formatters">
+            <directory suffix="Test.php">./test/NFSeTest/Formatter</directory>
+        </testsuite>
         <testsuite name="managers">
             <directory suffix="ManagerTest.php">./test/NFSeTest/Service</directory>
         </testsuite>
