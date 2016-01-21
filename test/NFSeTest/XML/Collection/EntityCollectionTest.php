@@ -9,7 +9,8 @@
 namespace NFSeTest\XML\Collection;
 
 use \NFSe\XML\Collection\EntityCollection;
-use \NFSe\XML\Entity\AbstractEntity;
+use \NFSe\XML\Entity\ComplexType\GenericComplexTypeEntity;
+use \NFSe\XML\Entity\SimpleType\GenericSimpleTypeEntity;
 
 /**
  * Description of EntityCollectionTest
@@ -21,18 +22,18 @@ class EntityCollectionTest extends \PHPUnit_Framework_TestCase
     public function testInsertInstancesOfAsbtractEntity()
     {
         $collection = new EntityCollection();
-        $collection->push(new AbstractEntity());
-        $collection->push(new AbstractEntity());
-        $collection->push(new AbstractEntity());
+        $collection->push(new GenericComplexTypeEntity());
+        $collection->push(new GenericComplexTypeEntity());
+        $collection->push(new GenericSimpleTypeEntity(null));
         $this->assertEquals(3, $collection->count());
     }
     
     public function testInsertOnlyInstancesOfAbstractEntity()
     {
         $collection = new EntityCollection();
-        $collection->push(new AbstractEntity());
+        $collection->push(new GenericComplexTypeEntity());
         $collection->push('Hello World!');
-        $collection->push(new AbstractEntity());
+        $collection->push(new GenericSimpleTypeEntity(null));
         $collection->push(array('Hello Worlds!'));
         $collection->push(1);
         $collection->push(1.2);
