@@ -2,14 +2,11 @@
 
 namespace NFSe\XML\Entity;
 
-use \NFSe\XML\Collection\EntityCollection;
-
 /**
- * Description of AbstractEntity
  *
  * @author Pedro Marcelo
  */
-class AbstractEntity
+abstract class AbstractEntity implements XMLEntityInterface, EntityInterface
 {
     /**
      * XML Tag Name
@@ -26,28 +23,7 @@ class AbstractEntity
     private $attributes = [];
     
     /**
-     * Collection of children
-     *
-     * @var EntityCollection
-     */
-    private $children;
-    
-    /**
-     * XML Tag Value
-     *
-     * @var mixed
-     */
-    private $value = "";
-    
-    public function __construct()
-    {
-        $this->children = new EntityCollection();
-    }
-    
-    /**
-     * Returns the XML tag name
-     * 
-     * @return string
+     * {@inheritDoc}
      */
     public function getTagName()
     {
@@ -55,10 +31,7 @@ class AbstractEntity
     }
     
     /**
-     * Sets a new attribute if $name is not set yet
-     * 
-     * @param string $name
-     * @param string $value
+     * {@inheritDoc}
      */
     public function setAttribute($name, $value)
     {
@@ -69,10 +42,7 @@ class AbstractEntity
     }
     
     /**
-     * 
-     * @param string $name
-     * @param mixed $default
-     * @return string
+     * {@inheritDoc}
      */
     public function getAttribute($name, $default = null)
     {
@@ -87,70 +57,5 @@ class AbstractEntity
     public function getAttributes()
     {
         return $this->attributes;
-    }
-    
-    /**
-     * Add a new child to this entity
-     * 
-     * @param AbstractEntity $entity
-     */
-    public function addChild(AbstractEntity $entity)
-    {
-        $this->children->push($entity);
-    }
-    
-    /**
-     * Returns a child at the specified index if it exists
-     * 
-     * @param integer $index
-     * @return AbstractEntity
-     */
-    public function getChild($index)
-    {
-        if ($this->children->isEmpty() || !$this->children->offsetExists($index))
-        {
-            return null;
-        }
-        return $this->children->offsetGet($index);
-    }
-    
-    /**
-     * Returns the children
-     * 
-     * @return array
-     */
-    public function getChildren()
-    {
-        return $this->children->getArrayCopy();
-    }
-    
-    /**
-     * Returns the number of children
-     * 
-     * @return integer
-     */
-    public function getCountChildren()
-    {
-        return $this->children->count();
-    }
-    
-    /**
-     * Sets a value to this entity
-     * 
-     * @param mixed $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-    
-    /**
-     * Returns the entity's value
-     * 
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 }

@@ -10,6 +10,8 @@ interface XMLEntityInterface
 {
     /**
      * Returns an XML representation of this object
+     * 
+     * @return string
      */
     public function toXML();
 }
