@@ -2,12 +2,13 @@
 
 namespace NFSe\XML\Entity;
 
+use \NFSe\XML\Entity\ComplexType\GenericComplexTypeEntity;
+
 /**
- * Description of RootEntity
  *
  * @author Pedro Marcelo
  */
-class RootEntity extends AbstractXMLEntity
+class RootEntity extends GenericComplexTypeEntity
 {
     /**
      * {@inheritDoc}
@@ -19,7 +20,7 @@ class RootEntity extends AbstractXMLEntity
         if ($this->getCountChildren() > 0)
         {
             $children = $this->getChildren();
-            /* @var $child AbstractXMLEntity */
+            /* @var $child AbstractEntity */
             foreach ($children as $child) {
                 $str .= $child->toXML();
             }
