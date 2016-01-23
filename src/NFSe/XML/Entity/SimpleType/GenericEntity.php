@@ -17,7 +17,7 @@ use \NFSe\Formatter\FormatterInterface;
  *
  * @author Pedro Marcelo
  */
-class GenericSimpleTypeEntity extends AbstractEntity implements SimpleEntityInterface
+class GenericEntity extends AbstractEntity implements SimpleEntityInterface
 {
     
     /**
@@ -40,7 +40,6 @@ class GenericSimpleTypeEntity extends AbstractEntity implements SimpleEntityInte
     public function __construct(FormatterInterface $formatter)
     {
         $this->formatter = $formatter;
-        parent::__construct();
     }
     
     /**

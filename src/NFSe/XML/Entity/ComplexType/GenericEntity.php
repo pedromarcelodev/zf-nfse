@@ -11,7 +11,7 @@ use \NFSe\XML\Collection\EntityCollection;
  *
  * @author Pedro Marcelo
  */
-class GenericComplexTypeEntity extends AbstractEntity implements CompoundEntityInterface
+class GenericEntity extends AbstractEntity implements CompoundEntityInterface
 {
     /**
      * Collection of children
