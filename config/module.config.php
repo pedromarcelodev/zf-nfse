@@ -29,6 +29,12 @@ return array(
                 $decimalFormatter->setPattern('9.9999');
                 return $decimalFormatter;
             },
+            "NFSe\Formatter\Number" => function($serviceManager) {
+                return new Formatter\NumberFormatter();
+            },
+            "NFSe\Formatter\NFSeNumber" => function($serviceManager) {
+                return new Formatter\SimpleType\NfseNumberFormatter();
+            },
         ),
     ),
     "nfse" => array(

@@ -3,5 +3,5 @@
 namespace NFSe;
 
 return array(
-    "AbstractTag" => "\\NFSe\\XML\\Factory\\AbstractFactory",
+    "TsNumeroNfse" => "\NFSe\XML\Factory\SimpleType\NfseNumberFactory",
 );
