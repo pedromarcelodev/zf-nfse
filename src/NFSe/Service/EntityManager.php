@@ -52,19 +52,11 @@ class EntityManager implements NFSeLocatorInterface
         }
         $entity = $this->entities[$name];
         $result = null;
+        $type = $this->getValidType($entity);
         
-        if (is_string($entity))
+        if (!empty($type))
         {
-            $entity = preg_replace("/^([\w])/", "\\$1", $entity);
-            
-            if (class_exists($entity))
-            {
-                $result = new $entity();
-            }
-        }
-        else if (is_callable($entity))
-        {
-            $result = call_user_func($entity, $this);
+            $result = call_user_func([$this, "getFrom$type"], $entity);
         }
         
         return $result;
@@ -87,5 +79,102 @@ class EntityManager implements NFSeLocatorInterface
     public function getServiceManager()
     {
         return $this->serviceManager;
+    }
+    
+    /**
+     * Returns the variable type between valid types.
+     * 
+     * @param mixed $entity
+     * @return string
+     */
+    private function getValidType($entity)
+    {
+        if (is_string($entity))
+        {
+            return 'String';
+        }
+        else if (is_callable($entity))
+        {
+            return 'Callable';
+        }
+        else if (is_array($entity))
+        {
+            return 'Array';
+        }
+        return '';
+    }
+    
+    /**
+     * Returns an entity using a string
+     * 
+     * @param string $entity
+     * @return mixed
+     */
+    private function getFromString($entity)
+    {
+        if ($this->getServiceManager()->has($entity))
+        {
+            return $this->getServiceManager()->get($entity);
+        }
+        
+        $result = null;
+        $entity = preg_replace("/^([\w])/", "\\$1", $entity);
+            
+        if (class_exists($entity))
+        {
+            $reflection = new \ReflectionClass($entity);
+
+            if ($reflection->implementsInterface("\NFSe\XML\Entity\CompoundEntityInterface"))
+            {
+                $result = new $entity();
+            }
+        }
+    }
+    
+    /**
+     * Returns an entity using an array
+     * 
+     * @param array $entity
+     * @return \NFSe\XML\Entity\SimpleEntityInterface|null
+     */
+    private function getFromArray($entity)
+    {
+        $result = null;
+        
+        if (isset($entity["class"]) && class_exists($entity["class"]))
+        {
+            $entityClass = $entity["class"];
+            $reflection = new \ReflectionClass($entityClass);
+            
+            if ($reflection->implementsInterface("\NFSe\XML\Entity\SimpleEntityInterface") &&
+                isset($entity["formatter"]))
+            {
+                if ($this->getServiceManager()->has($entity["formatter"]))
+                {
+                    $formatter = $this->getServiceManager()->get($entity["formatter"]);
+                }
+                else if (class_exists($entity["formatter"]))
+                {
+                    $formatterClass = $entity["formatter"];
+                    $formatter = new $formatterClass();
+                }
+                
+
+                $result = new $entityClass($formatter);
+            }
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * Returns an entity using a callable
+     * 
+     * @param callable $entity
+     * @return mixed
+     */
+    private function getFromCallable($entity)
+    {
+        return call_user_func($entity, $this);
     }
 }
