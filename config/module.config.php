@@ -35,6 +35,9 @@ return array(
             "NFSe\Formatter\NFSeNumber" => function($serviceManager) {
                 return new Formatter\SimpleType\NfseNumberFormatter();
             },
+            "NFSe\Formatter\VerificationCode" => function($serviceManager) {
+                return new Formatter\SimpleType\VerificationCodeFormatter();
+            },
         ),
     ),
     "nfse" => array(
