@@ -3,7 +3,6 @@
 namespace NFSe\Service;
 
 use \Zend\ServiceManager\ServiceLocatorInterface;
-use \Zend\ServiceManager\ServiceManager;
 
 /**
  *
@@ -11,11 +10,11 @@ use \Zend\ServiceManager\ServiceManager;
  */
 interface NFSeLocatorInterface extends ServiceLocatorInterface
 {
-    public function __construct(ServiceManager $serviceManager);
+    public function __construct(ServiceLocatorInterface $serviceManager);
     
     /**
      * 
-     * @return ServiceManager
+     * @return ServiceLocatorInterface
      */
-    public function getServiceManager();
+    public function getServiceLocator();
 }

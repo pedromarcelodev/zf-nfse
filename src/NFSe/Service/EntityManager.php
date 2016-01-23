@@ -2,10 +2,9 @@
 
 namespace NFSe\Service;
 
-use \Zend\ServiceManager\ServiceManager;
+use \Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Description of NFSeEntityManager
  *
  * @author Pedro Marcelo
  */
@@ -20,11 +19,11 @@ class EntityManager implements NFSeLocatorInterface
     
     /**
      *
-     * @var ServiceManager
+     * @var ServiceLocatorInterface
      */
     private $serviceManager;
     
-    public function __construct(ServiceManager $serviceManager)
+    public function __construct(ServiceLocatorInterface $serviceManager)
     {
         $config = $serviceManager->get('Config');
         
@@ -76,7 +75,7 @@ class EntityManager implements NFSeLocatorInterface
     /**
      * {@inheritDoc}
      */
-    public function getServiceManager()
+    public function getServiceLocator()
     {
         return $this->serviceManager;
     }
@@ -112,9 +111,9 @@ class EntityManager implements NFSeLocatorInterface
      */
     private function getFromString($entity)
     {
-        if ($this->getServiceManager()->has($entity))
+        if ($this->getServiceLocator()->has($entity))
         {
-            return $this->getServiceManager()->get($entity);
+            return $this->getServiceLocator()->get($entity);
         }
         
         $result = null;
@@ -149,9 +148,9 @@ class EntityManager implements NFSeLocatorInterface
             if ($reflection->implementsInterface("\NFSe\XML\Entity\SimpleEntityInterface") &&
                 isset($entity["formatter"]))
             {
-                if ($this->getServiceManager()->has($entity["formatter"]))
+                if ($this->getServiceLocator()->has($entity["formatter"]))
                 {
-                    $formatter = $this->getServiceManager()->get($entity["formatter"]);
+                    $formatter = $this->getServiceLocator()->get($entity["formatter"]);
                 }
                 else if (class_exists($entity["formatter"]))
                 {

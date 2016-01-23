@@ -18,7 +18,7 @@ class GenericFactory extends AbstractFactory
     public function buildEntity(\SimpleXMLElement $xmlElement)
     {
         /* @var $entityManager \NFSe\Service\EntityManager */
-        $entityManager = $this->getFactoryManager()->getServiceManager()->get('NFSe\Service\EntityManager');
+        $entityManager = $this->getFactoryManager()->getServiceLocator()->get('NFSe\Service\EntityManager');
         $entity = $entityManager->get($xmlElement->getName());
         foreach ($xmlElement->attributes() as $attribute => $value) {
             $entity->setAttribute($attribute, (string) $value);

@@ -2,10 +2,9 @@
 
 namespace NFSe\Service;
 
-use \Zend\ServiceManager\ServiceManager;
+use \Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Description of NFSeFactoryManager
  *
  * @author Pedro Marcelo
  */
@@ -20,11 +19,11 @@ class FactoryManager implements NFSeLocatorInterface
     
     /**
      * 
-     * @var ServiceManager
+     * @var ServiceLocatorInterface
      */
     private $serviceManager;
     
-    public function __construct(ServiceManager $serviceManager)
+    public function __construct(ServiceLocatorInterface $serviceManager)
     {
         $config = $serviceManager->get('Config');
         
@@ -84,7 +83,7 @@ class FactoryManager implements NFSeLocatorInterface
     /**
      * {@inheritDoc}
      */
-    public function getServiceManager()
+    public function getServiceLocator()
     {
         return $this->serviceManager;
     }
