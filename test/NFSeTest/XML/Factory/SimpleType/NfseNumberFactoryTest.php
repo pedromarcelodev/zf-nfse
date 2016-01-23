@@ -8,6 +8,8 @@ namespace NFSeTest\XML\Factory\SimpleType;
  */
 class NfseNumberFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    const FILE_TEST = 'tsnumeronfse-entity.xml';
+    
     public function testFailBuildEntity()
     {
         $xml = file_get_contents(__DIR__ . '/../../../../xml-tests/xmlfail.xml');
@@ -25,7 +27,7 @@ class NfseNumberFactoryTest extends \PHPUnit_Framework_TestCase
     
     public function testPassBuildEntity()
     {
-        $xml = file_get_contents(__DIR__ . '/../../../../xml-tests/tsnumeronfse-entity.xml');
+        $xml = file_get_contents(__DIR__ . '/../../../../xml-tests/' . self::FILE_TEST);
         $xmlObject = new \SimpleXMLElement($xml);
         $tagName = $xmlObject->getName();
         try {

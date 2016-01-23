@@ -6,7 +6,7 @@ namespace NFSeTest\XML\Entity\SimpleType;
  *
  * @author Pedro Marcelo
  */
-class NumberNfseTest extends \PHPUnit_Framework_TestCase
+class NfseNumberTest extends \PHPUnit_Framework_TestCase
 {
     const TAG_NAME = 'TsNumeroNfse';
     
