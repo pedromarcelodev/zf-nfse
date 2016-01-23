@@ -2,13 +2,13 @@
 
 namespace NFSe\XML\Entity;
 
-use \NFSe\XML\Entity\ComplexType\GenericComplexTypeEntity;
+use \NFSe\XML\Entity\ComplexType\GenericEntity;
 
 /**
  *
  * @author Pedro Marcelo
  */
-class RootEntity extends GenericComplexTypeEntity
+class RootEntity extends GenericEntity
 {
     /**
      * {@inheritDoc}
