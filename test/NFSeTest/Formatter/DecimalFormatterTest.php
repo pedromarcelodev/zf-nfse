@@ -21,6 +21,8 @@ class DecimalFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5241.738, $decimalFormatter->format($value));
         $decimalFormatter->setPattern('9.9999');
         $this->assertEquals(1.7381, $decimalFormatter->format($value));
+        $decimalFormatter->setPattern('9999999999999.99');
+        $this->assertEquals(5241.73, $decimalFormatter->format($value));
     }
     
     public function testInvalidPatterns()
