@@ -9,8 +9,6 @@
 namespace NFSeTest\XML\Collection;
 
 use \NFSe\XML\Collection\EntityCollection;
-use \NFSe\XML\Entity\ComplexType\GenericComplexTypeEntity;
-use \NFSe\XML\Entity\SimpleType\GenericSimpleTypeEntity;
 
 /**
  * Description of EntityCollectionTest
@@ -22,18 +20,24 @@ class EntityCollectionTest extends \PHPUnit_Framework_TestCase
     public function testInsertInstancesOfAsbtractEntity()
     {
         $collection = new EntityCollection();
-        $collection->push(new GenericComplexTypeEntity());
-        $collection->push(new GenericComplexTypeEntity());
-        $collection->push(new GenericSimpleTypeEntity(null));
+        /* @var $entityManager \NFSe\Service\EntityManager */
+        $entityManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\EntityManager');
+        $entity = $entityManager->get('TsNumeroNfse');
+        $collection->push($entity);
+        $collection->push($entity);
+        $collection->push($entity);
         $this->assertEquals(3, $collection->count());
     }
     
     public function testInsertOnlyInstancesOfAbstractEntity()
     {
         $collection = new EntityCollection();
-        $collection->push(new GenericComplexTypeEntity());
+        /* @var $entityManager \NFSe\Service\EntityManager */
+        $entityManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\EntityManager');
+        $entity = $entityManager->get('TsNumeroNfse');
+        $collection->push($entity);
         $collection->push('Hello World!');
-        $collection->push(new GenericSimpleTypeEntity(null));
+        $collection->push($entity);
         $collection->push(array('Hello Worlds!'));
         $collection->push(1);
         $collection->push(1.2);

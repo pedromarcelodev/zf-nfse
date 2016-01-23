@@ -26,7 +26,7 @@ class FactoryManagerTest extends \PHPUnit_Framework_TestCase
         try {
              /* @var $factoryManager \NFSe\Service\FactoryManager */
             $factoryManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FactoryManager');
-            $entity = $factoryManager->get('AbstractTag');
+            $entity = $factoryManager->get('TsNumeroNfse');
             $this->assertInstanceOf("\NFSe\XML\Factory\AbstractFactory", $entity);
         } catch (\NFSe\XML\InexistentXMLTagException $ex) {
             $this->fail("The 'AbstractTag' tag is not mapped");

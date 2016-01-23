@@ -26,10 +26,10 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase
         try {
             /* @var $entityManager \NFSe\Service\EntityManager */
             $entityManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\EntityManager');
-            $entity = $entityManager->get('AbstractTag');
+            $entity = $entityManager->get('TsNumeroNfse');
             $this->assertInstanceOf("\NFSe\XML\Entity\AbstractEntity", $entity);
         } catch (\NFSe\XML\InexistentXMLTagException $ex) {
-            $this->fail("The 'AbstractTag' tag is not mapped");
+            $this->fail("The 'TsNumeroNfse' tag is not mapped");
         }
     }
 }
