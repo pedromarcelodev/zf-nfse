@@ -16,6 +16,10 @@ class DecimalFormatter extends AbstractFormatter
      */
     public function format($value)
     {
+        if (preg_match("/([^\d.])/", $value))
+        {
+            throw new FormatterException("Invalid decimal number: '$value'");
+        }
         $pattern = $this->getPattern();
         $integerPart = intval($value);
         $decimalPart = $value - $integerPart;
