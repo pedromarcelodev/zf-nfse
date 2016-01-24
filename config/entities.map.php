@@ -15,4 +15,8 @@ return array(
         "class" => "NFSe\XML\Entity\SimpleType\RpsStatus",
         "formatter" => "NFSe\Formatter\Status",
     ),
+    "TsStatusNfse" => array(
+        "class" => "NFSe\XML\Entity\SimpleType\NfseStatus",
+        "formatter" => "NFSe\Formatter\Status",
+    ),
 );
