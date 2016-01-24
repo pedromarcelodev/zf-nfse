@@ -11,4 +11,8 @@ return array(
         "class" => "NFSe\XML\Entity\SimpleType\VerificationCode",
         "formatter" => "NFSe\Formatter\VerificationCode",
     ),
+    "TsStatusRps" => array(
+        "class" => "NFSe\XML\Entity\SimpleType\RpsStatus",
+        "formatter" => "NFSe\Formatter\Status",
+    ),
 );
