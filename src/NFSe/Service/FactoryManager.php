@@ -23,6 +23,13 @@ class FactoryManager implements NFSeLocatorInterface
      */
     private $serviceManager;
     
+    /**
+     * An array containing instances of FactoryInterface
+     *
+     * @var array
+     */
+    private $instances = [];
+    
     public function __construct(ServiceLocatorInterface $serviceManager)
     {
         $config = $serviceManager->get('Config');
@@ -50,23 +57,28 @@ class FactoryManager implements NFSeLocatorInterface
             throw new \NFSe\XML\InexistentXMLTagException("The '$name' tag is not mapped");
         }
         $factory = $this->factories[$name];
-        $result = null;
+        $instance = null;
         
         if (is_string($factory))
         {
-            $factory = preg_replace("/^([\w])/", "\$1", $factory);
-            
-            if (class_exists($factory))
-            {
-                $result = new $factory($this);
-            }
+            $instance = $this->getFromString($factory);
         }
         else if (is_callable($factory))
         {
-            $result = call_user_func($factory, $this);
+            $instance = call_user_func($factory, $this);
         }
         
-        return $result;
+        if (!($instance instanceof \NFSe\XML\Factory\FactoryInterface))
+        {
+            throw new \NFSe\XML\Factory\FactoryNotFoundException("The factory for '$name' could not be found");
+        }
+        $className = get_class($instance);
+        
+        if (!isset($this->instances[$className]))
+        {
+            $this->instances[$className] = $instance;
+        }
+        return $instance;
     }
 
     /**
@@ -86,5 +98,29 @@ class FactoryManager implements NFSeLocatorInterface
     public function getServiceLocator()
     {
         return $this->serviceManager;
+    }
+    
+    /**
+     * 
+     * @param string $factory
+     * @return \NFSe\Formatter\FormatterInterface|null
+     */
+    private function getFromString($factory)
+    {
+        $instance = null;
+        $factory = preg_replace("/^([\w])/", "\$1", $factory);
+        
+        if (class_exists($factory))
+        {
+            if (isset($this->instances[$factory]))
+            {
+                $instance = $this->instances[$factory];
+            }
+            else
+            {
+                $instance = new $factory($this);
+            }
+        }
+        return $instance;
     }
 }
