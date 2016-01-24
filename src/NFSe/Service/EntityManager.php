@@ -23,6 +23,12 @@ class EntityManager implements NFSeLocatorInterface
      */
     private $serviceManager;
     
+    /**
+     *
+     * @var FormatterManager
+     */
+    private $formatterManager;
+    
     public function __construct(ServiceLocatorInterface $serviceManager)
     {
         $config = $serviceManager->get('Config');
@@ -34,6 +40,7 @@ class EntityManager implements NFSeLocatorInterface
         }
         $this->entities = $config['nfse']['xml']['map']['entities'];
         $this->serviceManager = $serviceManager;
+        $this->formatterManager = $serviceManager->get('NFSe\Service\FormatterManager');
     }
 
     /**
@@ -78,6 +85,15 @@ class EntityManager implements NFSeLocatorInterface
     public function getServiceLocator()
     {
         return $this->serviceManager;
+    }
+    
+    /**
+     * 
+     * @return FormatterManager
+     */
+    public function getFormatterManager()
+    {
+        return $this->formatterManager;
     }
     
     /**
@@ -148,18 +164,21 @@ class EntityManager implements NFSeLocatorInterface
             if ($reflection->implementsInterface("\NFSe\XML\Entity\SimpleEntityInterface") &&
                 isset($entity["formatter"]))
             {
+                $formatter = null;
+                
                 if ($this->getServiceLocator()->has($entity["formatter"]))
                 {
                     $formatter = $this->getServiceLocator()->get($entity["formatter"]);
                 }
-                else if (class_exists($entity["formatter"]))
+                else if ($this->getFormatterManager()->has($entity["formatter"]))
                 {
-                    $formatterClass = $entity["formatter"];
-                    $formatter = new $formatterClass();
+                    $formatter = $this->getFormatterManager()->get($entity["formatter"]);
                 }
                 
-
-                $result = new $entityClass($formatter);
+                if (!is_null($formatter))
+                {
+                    $result = new $entityClass($formatter);
+                }
             }
         }
         
