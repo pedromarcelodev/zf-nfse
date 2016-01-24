@@ -12,8 +12,9 @@ class VerificationCodeFormatterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatValue()
     {
-        /* @var $formatter \NFSe\Formatter\FormatterInterface */
-        $formatter = \NFSeTest\Bootstrap::getServiceManager()->get("NFSe\Formatter\VerificationCode");
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $formatter = $formatterManager->get('NFSe\Formatter\VerificationCode');
         $this->assertEquals("abc", $formatter->format("abc"));
         $this->assertEquals("abcdef", $formatter->format("abcdef"));
         $this->assertEquals("abcdefghi", $formatter->format("abcdefghi"));

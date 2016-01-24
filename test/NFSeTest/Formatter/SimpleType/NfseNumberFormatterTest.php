@@ -3,7 +3,6 @@
 namespace NFSeTest\Formatter\SimpleType;
 
 use \NFSe\Formatter\FormatterException;
-use \NFSe\Formatter\SimpleType\NfseNumberFormatter;
 
 /**
  *
@@ -13,8 +12,9 @@ class NfseNumberFormatterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatValue()
     {
-        /* @var $formatter \NFSe\Formatter\FormatterInterface */
-        $formatter = \NFSeTest\Bootstrap::getServiceManager()->get("NFSe\Formatter\NFSeNumber");
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $formatter = $formatterManager->get('NFSe\Formatter\NFSeNumber');
         $this->assertEquals("201412345678901", $formatter->format("201412345678901"));
         $this->assertEquals("201512345678901", $formatter->format("201512345678901"));
         $this->assertEquals("201612345678901", $formatter->format("201612345678901"));

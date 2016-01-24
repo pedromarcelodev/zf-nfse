@@ -2,7 +2,6 @@
 
 namespace NFSeTest\Formatter;
 
-use \NFSe\Formatter\DateTimeFormatter;
 use \NFSe\Formatter\FormatterException;
 
 /**
@@ -13,7 +12,9 @@ class DateTimeFormatterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatValue()
     {
-        $datetimeFormatter = new DateTimeFormatter();
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $datetimeFormatter = $formatterManager->get('NFSe\Formatter\Date');
         $datetimeFormatter->setPattern('Y-m-d');
         $datetime1 = $datetimeFormatter->format('2016-01-20');
         $this->assertInstanceOf('\DateTime', $datetime1);

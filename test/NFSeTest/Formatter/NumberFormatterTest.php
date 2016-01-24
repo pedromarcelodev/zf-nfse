@@ -12,8 +12,9 @@ class NumberFormatterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatValue()
     {
-        /* @var $numberFormatter \NFSe\Formatter\FormatterInterface */
-        $numberFormatter = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Formatter\Number');
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $numberFormatter = $formatterManager->get('NFSe\Formatter\Number');
         $this->assertEquals(1234, $numberFormatter->format("1234"));
         $this->assertEquals(1234, $numberFormatter->format("0001234"));
         $this->assertEquals(10001234, $numberFormatter->format("10001234"));

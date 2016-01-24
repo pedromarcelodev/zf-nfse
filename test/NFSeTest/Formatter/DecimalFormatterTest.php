@@ -2,7 +2,6 @@
 
 namespace NFSeTest\Formatter;
 
-use \NFSe\Formatter\DecimalFormatter;
 use \NFSe\Formatter\FormatterException;
 
 /**
@@ -14,7 +13,9 @@ class DecimalFormatterTest extends \PHPUnit_Framework_TestCase
     public function testFormatValue()
     {
         $value = 5241.738193;
-        $decimalFormatter = new DecimalFormatter();
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $decimalFormatter = $formatterManager->get('NFSe\Formatter\Decimal');
         $decimalFormatter->setPattern('+9.99');
         $this->assertEquals(5241.73, $decimalFormatter->format($value));
         $decimalFormatter->setPattern('+9.999');
@@ -29,7 +30,9 @@ class DecimalFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $invalidCharacters = "qwertyuiopasdfghjklçzxcvbnm!@#$%¨&*()-_=+[{]}:;/?|";
         $max = strlen($invalidCharacters);
-        $decimalFormatter = new DecimalFormatter();
+        /* @var $formatterManager \NFSe\Service\FormatterManager */
+        $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+        $decimalFormatter = $formatterManager->get('NFSe\Formatter\Decimal');
         for ($i = 0; $i < 5; $i++) {
             $index = mt_rand(0, $max - 1);
             $character = $invalidCharacters[$index];
@@ -44,7 +47,9 @@ class DecimalFormatterTest extends \PHPUnit_Framework_TestCase
     public function testEmptyPattern()
     {
         try {
-            $decimalFormatter = new DecimalFormatter();
+            /* @var $formatterManager \NFSe\Service\FormatterManager */
+            $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
+            $decimalFormatter = $formatterManager->get('NFSe\Formatter\Decimal');
             $decimalFormatter->format(9.992739);
             $this->fail("Null pattern was used");
         } catch (FormatterException $ex) {
