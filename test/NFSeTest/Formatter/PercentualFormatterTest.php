@@ -17,6 +17,8 @@ class PercentualFormatterTest extends \PHPUnit_Framework_TestCase
         $formatter = $formatterManager->get('NFSe\Formatter\Percentual');
         $formatter->setPattern('9.9999');
         $this->assertEquals('0.259', $formatter->format('25.90%'));
+        $this->assertEquals('1', $formatter->format('100%'));
+        $this->assertEquals('1.2334', $formatter->format('123,345%'));
         $this->assertEquals('0.259', $formatter->format('25,90%'));
         $this->assertEquals('0.1293', $formatter->format('12,938294%'));
         $this->assertEquals('0.0129', $formatter->format('1,2938294%'));

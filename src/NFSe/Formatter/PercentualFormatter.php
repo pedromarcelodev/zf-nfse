@@ -18,7 +18,7 @@ class PercentualFormatter extends DecimalFormatter
             {
                 $posDot = strpos($value, '.');
                 $value = strtr($value, array('%' => '', '.' => ''));
-                $newPosDot = $posDot !== false? $posDot - 2 : strlen($value) - 3;
+                $newPosDot = $posDot !== false? $posDot - 2 : strlen($value) - 2;
                 
                 if ($newPosDot > 0)
                 {

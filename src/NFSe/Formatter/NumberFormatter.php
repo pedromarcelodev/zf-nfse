@@ -18,7 +18,12 @@ class NumberFormatter implements FormatterInterface
     {
         if (is_numeric($value))
         {
-            $value = preg_replace("/(^[0]+|[.?0]+$)/", "", "$value");
+            $value = preg_replace("/(^[0]+)/", "", "$value");
+            
+            if (strpos($value, '.') !== false)
+            {
+                $value = preg_replace("/([.?0]+$)/", "", "$value");
+            }
             return $value;
         }
         else
