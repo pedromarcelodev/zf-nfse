@@ -16,7 +16,20 @@ class PercentualFormatter extends DecimalFormatter
             
             if (strpos($value, '%') !== false)
             {
-                $value = floatval(strtr($value, array('%' => ''))) / 100;
+                $posDot = strpos($value, '.');
+                $value = strtr($value, array('%' => '', '.' => ''));
+                $newPosDot = $posDot !== false? $posDot - 2 : strlen($value) - 3;
+                
+                if ($newPosDot > 0)
+                {
+                    $newValue = substr($value, 0, $newPosDot);
+                    $newValue .= "." . substr($value, $newPosDot);
+                }
+                else
+                {
+                    $newValue = "0." . str_repeat("0", abs($newPosDot)) . $value;
+                }
+                $value = $newValue;
             }
         }
         return parent::format($value);

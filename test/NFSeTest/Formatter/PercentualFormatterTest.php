@@ -16,12 +16,13 @@ class PercentualFormatterTest extends \PHPUnit_Framework_TestCase
         $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
         $formatter = $formatterManager->get('NFSe\Formatter\Percentual');
         $formatter->setPattern('9.9999');
-        $this->assertEquals(0.259, $formatter->format('25.90%'));
-        $this->assertEquals(0.259, $formatter->format('25,90%'));
-        $this->assertEquals(0.1293, $formatter->format('12,938294%'));
-        $this->assertEquals(0.1293, $formatter->format('0.12938294'));
-        $this->assertEquals(0.1293, $formatter->format('0,12938294'));
-        $this->setExpectedException("\NFSe\Formatter\FormatterException", "Invalid decimal number: 'a'");
+        $this->assertEquals('0.259', $formatter->format('25.90%'));
+        $this->assertEquals('0.259', $formatter->format('25,90%'));
+        $this->assertEquals('0.1293', $formatter->format('12,938294%'));
+        $this->assertEquals('0.0129', $formatter->format('1,2938294%'));
+        $this->assertEquals('0.1293', $formatter->format('0.12938294'));
+        $this->assertEquals('0.1293', $formatter->format('0,12938294'));
+        $this->setExpectedException("\NFSe\Formatter\FormatterException", "The formatted value is not a number");
         $formatter->format('a');
     }
     

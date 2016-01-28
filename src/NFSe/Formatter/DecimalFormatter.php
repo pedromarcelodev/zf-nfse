@@ -6,54 +6,54 @@ namespace NFSe\Formatter;
  *
  * @author Pedro Marcelo
  */
-class DecimalFormatter extends AbstractFormatter
+class DecimalFormatter extends NumberFormatter implements PatternInterface
 {
+    /**
+     * Pattern that will be used to format a value
+     *
+     * @var string
+     */
+    private $pattern;
+    
     /**
      * Returns a float value according to the pattern
      * 
      * @param string $value
-     * @return float
+     * @return string
      */
     public function format($value)
     {
-        if (preg_match("/([^\d.])/", $value))
-        {
-            throw new FormatterException("Invalid decimal number: '$value'");
-        }
+        $value = parent::format($value);
         $pattern = $this->getPattern();
-        $integerPart = intval($value);
-        $decimalPart = $value - $integerPart;
+        $parts = explode('.', $value);
+        $integerPart = $parts[0];
+        $decimalPart = (isset($parts[1]))? $parts[1] : "";
         $start = "";
         $end = "";
 
         if (strpos($pattern, "+9") === 0)
         {
-            $start = "$integerPart";
+            $start = $integerPart;
         }
         else if (preg_match("/^(\d+)/", $pattern, $matches))
         {
             $max = strlen($matches[1]);
-            $strIntegerPart = "$integerPart";
-            $strlen = strlen($strIntegerPart);
+            $strlen = strlen($integerPart);
             $length = ($max < $strlen)? $max : $strlen;
-            $start = substr($strIntegerPart, $length * -1);
+            $start = substr($integerPart, $length * -1);
         }
         else
         {
             $start = "0";
         }
 
-        if ($decimalPart > 0 && preg_match("/\.(\d+)$/", $pattern, $matches))
+        if (strlen($decimalPart) > 0 && preg_match("/\.(\d+)$/", $pattern, $matches))
         {
             $end = ".";
             $max = strlen($matches[1]);
-            $strDecimalPart = strtr("$decimalPart", array(
-                '0.' => '',
-                '0,' => '',
-            ));
-            $strlen = strlen($strDecimalPart);
+            $strlen = strlen($decimalPart);
             $length = ($max < $strlen)? $max : $strlen;
-            $end .= substr($strDecimalPart, 0, $length);
+            $end .= substr($decimalPart, 0, $length);
         }
         return floatval($start . $end);
     }
@@ -70,6 +70,19 @@ class DecimalFormatter extends AbstractFormatter
         {
             throw new FormatterException("Invalid pattern '$pattern'. Read documentation for more information.");
         }
-        parent::setPattern($pattern);
+        $this->pattern = $pattern;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPattern()
+    {
+        if (is_null($this->pattern))
+        {
+            throw new FormatterException("Null pattern");
+        }
+        return $this->pattern;
+    }
+
 }

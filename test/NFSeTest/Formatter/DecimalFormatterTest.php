@@ -17,13 +17,13 @@ class DecimalFormatterTest extends \PHPUnit_Framework_TestCase
         $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
         $decimalFormatter = $formatterManager->get('NFSe\Formatter\Decimal');
         $decimalFormatter->setPattern('+9.99');
-        $this->assertEquals(5241.73, $decimalFormatter->format($value));
+        $this->assertEquals('5241.73', $decimalFormatter->format($value));
         $decimalFormatter->setPattern('+9.999');
-        $this->assertEquals(5241.738, $decimalFormatter->format($value));
+        $this->assertEquals('5241.738', $decimalFormatter->format($value));
         $decimalFormatter->setPattern('9.9999');
-        $this->assertEquals(1.7381, $decimalFormatter->format($value));
+        $this->assertEquals('1.7381', $decimalFormatter->format($value));
         $decimalFormatter->setPattern('9999999999999.99');
-        $this->assertEquals(5241.73, $decimalFormatter->format($value));
+        $this->assertEquals('5241.73', $decimalFormatter->format($value));
     }
     
     public function testInvalidPatterns()

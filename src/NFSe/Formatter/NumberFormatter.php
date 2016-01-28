@@ -11,24 +11,15 @@ class NumberFormatter implements FormatterInterface
     /**
      * 
      * @param string|integer|float $value
-     * @return integer|float
+     * @return string
      * @throws FormatterException
      */
     public function format($value)
     {
         if (is_numeric($value))
         {
-            $float = floatval($value);
-            $integer = intval($value);
-            
-            if ($integer == $float)
-            {
-                return $integer;
-            }
-            else
-            {
-                return $float;
-            }
+            $value = preg_replace("/(^[0]+|[.?0]+$)/", "", "$value");
+            return $value;
         }
         else
         {

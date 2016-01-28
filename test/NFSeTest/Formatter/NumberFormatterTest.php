@@ -15,10 +15,10 @@ class NumberFormatterTest extends \PHPUnit_Framework_TestCase
         /* @var $formatterManager \NFSe\Service\FormatterManager */
         $formatterManager = \NFSeTest\Bootstrap::getServiceManager()->get('NFSe\Service\FormatterManager');
         $numberFormatter = $formatterManager->get('NFSe\Formatter\Number');
-        $this->assertEquals(1234, $numberFormatter->format("1234"));
-        $this->assertEquals(1234, $numberFormatter->format("0001234"));
-        $this->assertEquals(10001234, $numberFormatter->format("10001234"));
-        $this->assertEquals(1234.23, $numberFormatter->format("0001234.23"));
+        $this->assertEquals('1234', $numberFormatter->format("1234"));
+        $this->assertEquals('1234', $numberFormatter->format("0001234"));
+        $this->assertEquals('10001234', $numberFormatter->format("10001234"));
+        $this->assertEquals('1234.23', $numberFormatter->format("0001234.23"));
         
         try {
             $numberFormatter->format("1b234");
