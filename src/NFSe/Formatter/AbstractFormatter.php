@@ -6,7 +6,7 @@ namespace NFSe\Formatter;
  *
  * @author Pedro Marcelo
  */
-abstract class AbstractFormatter implements FormatterInterface
+abstract class AbstractFormatter implements FormatterInterface, PatternInterface
 {
     /**
      * Pattern that will be used to format a value
@@ -16,9 +16,7 @@ abstract class AbstractFormatter implements FormatterInterface
     private $pattern;
     
     /**
-     * Sets a new pattern
-     * 
-     * @param string $pattern
+     * {@inheritDoc}
      */
     public function setPattern($pattern)
     {
@@ -33,9 +31,7 @@ abstract class AbstractFormatter implements FormatterInterface
     }
     
     /**
-     * Returns the pattern used by this formatter
-     * 
-     * @return string
+     * {@inheritDoc}
      */
     public function getPattern()
     {
